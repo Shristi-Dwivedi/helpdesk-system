@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
+import KnowledgeBase from "./KnowledgeBase";
+
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -34,6 +36,8 @@ function Profile() {
           <p><strong>Phone:</strong> {user.phone}</p>
         </div>
       )}
+      <KnowledgeBase />
+
     </div>
   );
 }

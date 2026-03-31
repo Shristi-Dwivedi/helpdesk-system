@@ -22,6 +22,8 @@ function Navbar() {
 
         {token && <Link to="/profile">Profile</Link>}
         {token && <button onClick={handleLogout}>Logout</button>}
+
+        {token && <Link to="/tickets">Tickets</Link>}
       </div>
     </nav>
   );

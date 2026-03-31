@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import KnowledgeBase from "./pages/KnowledgeBase";
+import Tickets from "./pages/Tickets";
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/knowledge-base" element={<KnowledgeBase />} />
+        <Route path="/tickets" element={<Tickets />} />
 
       </Routes>
     </BrowserRouter>

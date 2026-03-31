@@ -3,133 +3,119 @@ import API from "../api/axios";
 
 function KnowledgeBase() {
   const [kbData, setKbData] = useState([]);
-  const [query, setQuery] = useState("");
-  const [chat, setChat] = useState([]);
-
-  const predefinedQuestions = [
-    "reset password",
-    "create ticket",
-    "check ticket status",
-    "contact support"
-  ];
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchKB = async () => {
-      try {
-        const res = await API.get("kb/");
-        setKbData(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchKB();
   }, []);
 
-  const handleAsk = () => {
-    if (!query) return;
+  const fetchKB = async (query = "") => {
+    try {
+      const url = query
+        ? `kb/kb/?search=${query}`
+        : "kb/kb/";
 
-    const found = kbData.find(item =>
-      item.question.toLowerCase().includes(query.toLowerCase())
-    );
-
-    const answer = found ? found.answer : "Sorry, I don't know this.";
-
-    setChat([...chat, { user: query, bot: answer }]);
-    setQuery("");
+      const res = await API.get(url);
+      console.log("KB DATA:", res.data);
+      setKbData(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handlePredefined = (question) => {
-    const found = kbData.find(item =>
-      item.question.toLowerCase().includes(question.toLowerCase())
-    );
-
-    const answer = found ? found.answer : "Sorry, I don't know this.";
-
-    setChat([...chat, { user: question, bot: answer }]);
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    fetchKB(value);
   };
 
   return (
     <div
       style={{
-        position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "300px",
-        background: "#fff",
-        border: "1px solid #ccc",
+        marginTop: "20px",
+        padding: "25px",
+        backgroundColor: "#f9fafb",
         borderRadius: "10px",
-        boxShadow: "0 0 10px rgba(0,0,0,0.2)",
-        padding: "10px",
-        zIndex: 1000
+        border: "1px solid #ddd",
       }}
     >
-      <h4>Help Assistant</h4>
-
-      {/* Predefined */}
-      <div>
-        {predefinedQuestions.map((q, i) => (
-          <button
-            key={i}
-            onClick={() => handlePredefined(q)}
-            style={{
-              margin: "3px",
-              padding: "4px 8px",
-              borderRadius: "15px",
-              border: "none",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              fontSize: "12px",
-              cursor: "pointer"
-            }}
-          >
-            {q}
-          </button>
-        ))}
-      </div>
-
-      {/* Chat */}
-      <div
+      <h2 style={{ marginBottom: "15px", color: "#1f2937" }}>
+        Knowledge Base
+      </h2>
+      
+      <input
+        type="text"
+        placeholder="Search FAQs..."
+        value={search}
+        onChange={handleSearch}
         style={{
-          height: "150px",
-          overflowY: "auto",
-          border: "1px solid #ddd",
-          margin: "8px 0",
-          padding: "5px",
-          background: "#f9f9f9",
-          fontSize: "13px",
-          color: "#000"
+          width: "100%",
+          padding: "10px",
+          marginBottom: "20px",
+          borderRadius: "6px",
+          border: "1px solid #ccc",
+          fontSize: "14px",
         }}
-      >
-        {chat.map((c, i) => (
-          <div key={i}>
-            <p><b>You:</b> {c.user}</p>
-            <p style={{ color: "#007bff" }}><b>Bot:</b> {c.bot}</p>
-          </div>
-        ))}
-      </div>
+      />
 
-      {/* Input */}
-      <div style={{ display: "flex" }}>
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Ask..."
-          style={{ flex: 1, padding: "5px", fontSize: "12px" }}
-        />
-        <button
-          onClick={handleAsk}
+      {kbData.length === 0 && (
+        <p style={{ color: "#666" }}>No matching FAQs found</p>
+      )}
+
+      {kbData.map((item) => (
+        <div
+          key={item.id}
           style={{
-            marginLeft: "5px",
-            background: "#28a745",
-            color: "#fff",
-            border: "none",
-            padding: "5px"
+            marginBottom: "18px",
+            padding: "18px",
+            backgroundColor: "#fff",
+            borderRadius: "10px",
+            border: "1px solid #e5e7eb",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
           }}
         >
-          Send
-        </button>
-      </div>
+          {/* Title */}
+          <h3
+            style={{
+              margin: "0 0 5px 0",
+              color: "#111827",
+            }}
+          >
+            {item.title}
+          </h3>
+
+          {/* Category */}
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#6b7280",
+              marginBottom: "10px",
+            }}
+          >
+            Category: {item.category}
+          </p>
+
+          {/* Question */}
+          <p
+            style={{
+              fontWeight: "500",
+              color: "#1f2937",
+              marginBottom: "5px",
+            }}
+          >
+            Q: {item.question}
+          </p>
+
+          {/* Answer */}
+          <p
+            style={{
+              color: "#4b5563",
+            }}
+          >
+            A: {item.answer}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }

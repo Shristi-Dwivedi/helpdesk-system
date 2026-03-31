@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
 import KnowledgeBase from "./KnowledgeBase";
-
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+
+  useEffect(()=>{
+    const token = localStorage.getItem("access");
+    if(!token){
+      navigate("/login");
+    }
+  },[]);
 
   useEffect(() => {
     const fetchProfile = async () => {

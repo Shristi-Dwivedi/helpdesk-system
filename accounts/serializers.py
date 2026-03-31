@@ -24,5 +24,3 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'role', 'phone']
         read_only_fields = ['role']
-class ChatbotQuerySerializer(serializers.Serializer):
-    query = serializers.CharField()

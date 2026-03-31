@@ -1,0 +1,160 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 1050px;
+  min-height: 620px;
+  display: flex;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.auth-left {
+  width: 42%;
+  background-color: black;
+  color: white;
+  padding: 60px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-left h2 {
+  font-size: 40px;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.auth-left p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #e8efff;
+}
+
+.auth-right {
+  width: 58%;
+  padding: 55px 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-right h1 {
+  font-size: 36px;
+  color: #1f2937;
+  margin-bottom: 28px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-form input,
+.auth-form select {
+    color: grey;
+  width: 100%;
+  height: 58px;
+  padding: 0 18px;
+  border: 1px solid #cfd6e4;
+  border-radius: 12px;
+  font-size: 17px;
+  outline: none;
+  background: #f9fbff;
+  transition: 0.2s ease;
+}
+
+.auth-form textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid #cfd6e4;
+  border-radius: 12px;
+  font-size: 17px;
+  outline: none;
+  background: #f9fbff;
+}
+
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+  box-shadow: 0 0 0 3px rgba(47, 99, 216, 0.12);
+  background: white;
+}
+
+.auth-form button {
+  height: 58px;
+  border: none;
+  border-radius: 12px;
+  background: black;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s ease;
+}
+
+.success-text {
+  margin-top: 16px;
+  color: #15803d;
+  font-size: 15px;
+}
+
+.error-text {
+  margin-top: 16px;
+  color: #dc2626;
+  font-size: 15px;
+}
+
+.auth-switch {
+  margin-top: 22px;
+  font-size: 15px;
+  color: #4b5563;
+}
+
+.auth-switch a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .auth-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+  }
+
+  .auth-left {
+    padding: 40px 30px;
+  }
+
+  .auth-right {
+    padding: 40px 30px;
+  }
+
+  .auth-left h2 {
+    font-size: 32px;
+  }
+
+  .auth-right h1 {
+    font-size: 30px;
+  }
+}

@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Tickets from "./pages/Tickets";
+import Analytics from "./pages/Analytics";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tickets" element={<Tickets />} />
+        <Route path="/analytics" element={<Analytics />} />
 
       </Routes>
     </BrowserRouter>

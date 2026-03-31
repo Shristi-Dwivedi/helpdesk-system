@@ -9,12 +9,12 @@ function Profile() {
   const navigate = useNavigate();
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem("access");
-    if(!token){
+    if (!token) {
       navigate("/login");
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -38,11 +38,17 @@ function Profile() {
 
       {user && (
         <div className="profile-card">
-          <p><strong>ID:</strong> {user.id}</p>
-          <p><strong>Username:</strong> {user.username}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Role:</strong> {user.role}</p>
-          <p><strong>Phone:</strong> {user.phone}</p>
+          <table className="profile-table" border={1} align="center">
+            <tr>
+              <td><p><strong>ID:</strong> {user.id}</p></td>
+              <td><p><strong>Username:</strong> {user.username}</p></td>
+
+              <td><p><strong>Email:</strong> {user.email}</p></td>
+              <td><p><strong>Role:</strong> {user.role}</p></td>
+
+              <td><p><strong>Phone:</strong> {user.phone}</p></td>
+            </tr>
+          </table>
         </div>
       )}
       <KnowledgeBase />

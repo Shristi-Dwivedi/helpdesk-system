@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../api/axios";
+import "./Auth.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -35,38 +36,53 @@ function Login() {
       setTimeout(() => navigate("/profile"), 1000);
     } catch (err) {
       console.error(err.response?.data || err.message);
-      setError("Login failed. Invalid username or password.");
+      setError("Invalid username or password.");
     }
   };
 
   return (
-    <div className="page-container">
-      <h2>Login</h2>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-left">
+          <h2>Welcome Back</h2>
+          <p>
+            Login to access your helpdesk dashboard, track complaints, and manage your support activities.
+          </p>
+        </div>
 
-      <form className="form-box" onSubmit={handleLogin}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
+        <div className="auth-right">
+          <h1>Login</h1>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <form onSubmit={handleLogin} className="auth-form">
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
 
-        <button type="submit">Login</button>
-      </form>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
 
-      {message && <p className="success-text">{message}</p>}
-      {error && <p className="error-text">{error}</p>}
+            <button type="submit">Login</button>
+          </form>
+
+          {message && <p className="success-text">{message}</p>}
+          {error && <p className="error-text">{error}</p>}
+
+          <p className="auth-switch">
+            Don’t have an account? <Link to="/register">Register</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

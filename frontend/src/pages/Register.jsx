@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../api/axios";
+import "./Auth.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -39,60 +40,75 @@ function Register() {
   };
 
   return (
-    <div className="page-container">
-      <h2>Register</h2>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-left">
+          <h2>Create Account</h2>
+          <p>
+            Register to raise complaints, track ticket status, and access support resources in one place.
+          </p>
+        </div>
 
-      <form className="form-box" onSubmit={handleRegister}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
+        <div className="auth-right">
+          <h1>Register</h1>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+          <form onSubmit={handleRegister} className="auth-form">
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
 
-        <input
-          type="text"
-          name="phone"
-          placeholder="Enter phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
 
-        <select
-          name="role"
-          value={formData.role}
-          onChange={handleChange}
-        >
-          <option value="user">User</option>
-          <option value="agent">Agent</option>
-          <option value="admin">Admin</option>
-        </select>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Enter phone number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+            >
+              <option value="user">User</option>
+              <option value="agent">Agent</option>
+              <option value="admin">Admin</option>
+            </select>
 
-        <button type="submit">Register</button>
-      </form>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
 
-      {message && <p className="success-text">{message}</p>}
-      {error && <p className="error-text">{error}</p>}
+            <button type="submit">Register</button>
+          </form>
+
+          {message && <p className="success-text">{message}</p>}
+          {error && <p className="error-text">{error}</p>}
+
+          <p className="auth-switch">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

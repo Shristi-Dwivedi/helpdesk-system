@@ -7,7 +7,7 @@ function Tickets() {
 
   const [user, setUser] = useState(null);
   const [tickets, setTickets] = useState([]);
-  const [agents, setAgents] = useState([]); // agents are not ready for now
+  // const [agents, setAgents] = useState([]); // agents are not ready for now
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -148,6 +148,7 @@ function Tickets() {
           padding: "20px",
           borderRadius: "10px",
           border: "1px solid #ddd",
+          width: "1000px",
         }}
       >
         <h3>{user?.role === "admin" ? "All Complaints" : "My Complaints"}</h3>

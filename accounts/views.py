@@ -1,8 +1,5 @@
-from rest_framework import generics, permissions, status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .serializers import RegisterSerializer, UserProfileSerializer, ChatbotQuerySerializer
-from .models import ChatbotInteraction
+from rest_framework import generics, permissions
+from .serializers import RegisterSerializer, UserProfileSerializer
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
